@@ -20,11 +20,20 @@ import java.util.*
 
 fun Application.main() {
     val hikariPropertiesStream = Application::class.java.classLoader.getResourceAsStream("hikari.properties")
-    val hikariProperties = Properties()
-    hikariProperties.load(hikariPropertiesStream)
+    val hikariProperties = Properties().apply { this.load(hikariPropertiesStream) }
     val config = HikariConfig(hikariProperties)
     val datasource = HikariDataSource(config)
     Database.connect(datasource)
+
+//    transaction {
+//        logger.addLogger(StdOutSqlLogger)
+//        val username = ServiceProviders.insertAndGetId {
+//            it[name] = "Igor"
+//            it[phone] = "88005553555"
+//            it[description] = "I can repair you computer"
+//        } get ServiceProviders.id
+//        println(username)
+//    }
 
     install(DefaultHeaders)
     install(CallLogging)
