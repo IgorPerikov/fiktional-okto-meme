@@ -9,8 +9,23 @@ import io.ktor.http.ContentType
 import io.ktor.response.respondText
 import io.ktor.routing.Routing
 import io.ktor.routing.get
+import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.StdOutSqlLogger
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.transactions.transaction
+import com.zaxxer.hikari.HikariDataSource
+import com.zaxxer.hikari.HikariConfig
+import java.util.*
+
 
 fun Application.main() {
+    val hikariPropertiesStream = Application::class.java.classLoader.getResourceAsStream("hikari.properties")
+    val hikariProperties = Properties()
+    hikariProperties.load(hikariPropertiesStream)
+    val config = HikariConfig(hikariProperties)
+    val datasource = HikariDataSource(config)
+    Database.connect(datasource)
+
     install(DefaultHeaders)
     install(CallLogging)
     install(Routing) {

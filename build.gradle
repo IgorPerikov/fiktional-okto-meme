@@ -51,6 +51,8 @@ junitPlatform {
 ext {
     ktor_version = '0.9.1'
     exposed_version = '0.10.1'
+    postgres_version = '42.2.2'
+    hikari_cp_version = '2.7.8'
     spek_version = '1.1.5'
     hamkrest_version = '1.4.2.2'
 }
@@ -59,6 +61,10 @@ dependencies {
     compile ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
     compile ("io.ktor:ktor-server-netty:$ktor_version")
     compile ("org.jetbrains.exposed:exposed:$exposed_version")
+
+    compile ("org.postgresql:postgresql:$postgres_version")
+
+    compile ("com.zaxxer:HikariCP:$hikari_cp_version")
 
     testCompile ("org.jetbrains.spek:spek-api:$spek_version") {
         exclude group: 'org.jetbrains.kotlin'
