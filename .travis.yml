@@ -1,0 +1,10 @@
+sudo: required
+
+services:
+  - docker
+
+before_script:
+  - chmod a+x ./build.sh
+
+script:
+  - ./build.sh
