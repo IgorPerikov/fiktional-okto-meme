@@ -1,5 +1,6 @@
-package oktomeme
+package oktomeme.db
 
+import oktomeme.ServiceCategory
 import org.jetbrains.exposed.sql.Table
 
 object ServiceProviders : Table("service_providers") {

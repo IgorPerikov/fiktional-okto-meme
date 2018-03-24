@@ -53,6 +53,7 @@ ext {
     exposed_version = '0.10.1'
     postgres_version = '42.2.2'
     hikari_cp_version = '2.7.8'
+    flyway_version = '5.0.7'
     logback_version = '1.2.3'
     spek_version = '1.1.5'
     hamkrest_version = '1.4.2.2'
@@ -66,6 +67,7 @@ dependencies {
     compile ("org.jetbrains.exposed:exposed:$exposed_version")
     compile ("org.postgresql:postgresql:$postgres_version")
     compile ("com.zaxxer:HikariCP:$hikari_cp_version")
+    compile ("org.flywaydb:flyway-core:$flyway_version")
 
     compile ("ch.qos.logback:logback-classic:$logback_version")
 

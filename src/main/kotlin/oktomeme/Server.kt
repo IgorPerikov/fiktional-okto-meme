@@ -9,6 +9,7 @@ import io.ktor.http.ContentType
 import io.ktor.response.respondText
 import io.ktor.routing.Routing
 import io.ktor.routing.get
+import oktomeme.db.DbTools
 
 fun Application.main() {
     DbTools.init()
