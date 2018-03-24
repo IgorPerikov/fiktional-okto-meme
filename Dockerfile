@@ -1,5 +1,4 @@
 FROM openjdk:8u151-jdk-alpine AS BUILD_IMAGE
-USER root
 WORKDIR /
 COPY . /
 RUN ./gradlew build

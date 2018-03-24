@@ -10,4 +10,5 @@
     </root>
 
     <logger name="io.netty" level="INFO"/>
+    <logger name="org.flywaydb" level="INFO"/>
 </configuration>
