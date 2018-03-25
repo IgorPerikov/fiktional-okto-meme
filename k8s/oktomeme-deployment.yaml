@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oktomeme
+spec:
+  selector:
+    matchLabels:
+      app: oktomeme
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: oktomeme
+    spec:
+      containers:
+      - name: oktomeme
+        env:
+        - name: JDBC_URL
+          value: jdbc:postgresql://pg-service:5432/postgres?user=root&password=root&ssl=false
+        image: igorperikov/oktomeme:5
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: oktomeme-service
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: oktomeme
+  type: NodePort
