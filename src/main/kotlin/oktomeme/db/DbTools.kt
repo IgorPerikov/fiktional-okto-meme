@@ -6,8 +6,6 @@ import oktomeme.ServiceCategory
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.SchemaUtils.withDataBaseLock
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
 
@@ -37,61 +35,65 @@ object DbTools {
     private fun launchMigrations() {
         transaction {
             withDataBaseLock {
-                SchemaUtils.createMissingTablesAndColumns(Users, ServiceRequests, ServiceProviders)
-                if (User.all().count() == 0) {
-                    val igorId = Users.insertAndGetId {
-                        it[name] = "Igor"
-                        it[phone] = "+7912"
-                    }.value
-                    val johnId = Users.insertAndGetId {
-                        it[name] = "John"
-                        it[phone] = "+1911"
-                    }.value
-                    val jamesId = Users.insertAndGetId {
-                        it[name] = "James"
-                        it[phone] = "+2900"
-                    }.value
-
-                    ServiceProviders.insert {
-                        it[userId] = igorId
-                        it[description] = "I can fix your PC"
-                        it[category] = ServiceCategory.HIGHTECH
+                SchemaUtils.createMissingTablesAndColumns(
+                    UsersTable,
+                    ServiceRequestsTable,
+                    ServiceProvidersTable
+                )
+                if (UserEntity.all().count() == 0) {
+                    val igor: UserEntity = UserEntity.new {
+                        name = "Igor"
+                        phone = "+7912"
                     }
-                    ServiceProviders.insert {
-                        it[userId] = igorId
-                        it[description] = "I can fix your car"
-                        it[category] = ServiceCategory.TECH
+                    val john: UserEntity = UserEntity.new {
+                        name = "John"
+                        phone = "+1911"
                     }
-                    ServiceProviders.insert {
-                        it[userId] = igorId
-                        it[description] = "I can fix your fridge"
-                        it[category] = ServiceCategory.TECH
-                    }
-                    ServiceProviders.insert {
-                        it[userId] = johnId
-                        it[description] = "I can teach you how to drive"
-                        it[category] = ServiceCategory.LIFESKILLS
+                    val james: UserEntity = UserEntity.new {
+                        name = "James"
+                        phone = "+2900"
                     }
 
-                    ServiceRequests.insert {
-                        it[userId] = igorId
-                        it[description] = "I want to study icelandic language"
-                        it[category] = ServiceCategory.LIFESKILLS
+                    ServiceProviderEntity.new {
+                        user = igor
+                        description = "I can fix your PC"
+                        category = ServiceCategory.HIGHTECH
                     }
-                    ServiceRequests.insert {
-                        it[userId] = jamesId
-                        it[description] = "I need my washing machine to be fixed"
-                        it[category] = ServiceCategory.TECH
+                    ServiceProviderEntity.new {
+                        user = igor
+                        description = "I can fix your car"
+                        category = ServiceCategory.TECH
                     }
-                    ServiceRequests.insert {
-                        it[userId] = jamesId
-                        it[description] = "I need someone to paint my walls"
-                        it[category] = ServiceCategory.LIFESKILLS
+                    ServiceProviderEntity.new {
+                        user = igor
+                        description = "I can fix your fridge"
+                        category = ServiceCategory.TECH
                     }
-                    ServiceRequests.insert {
-                        it[userId] = jamesId
-                        it[description] = "I am looking for a football coach for my children"
-                        it[category] = ServiceCategory.LIFESKILLS
+                    ServiceProviderEntity.new {
+                        user = john
+                        description = "I can teach you how to drive"
+                        category = ServiceCategory.LIFESKILLS
+                    }
+
+                    ServiceRequestEntity.new {
+                        user = igor
+                        description = "I want to study icelandic language"
+                        category = ServiceCategory.LIFESKILLS
+                    }
+                    ServiceRequestEntity.new {
+                        user = james
+                        description = "I need my washing machine to be fixed"
+                        category = ServiceCategory.TECH
+                    }
+                    ServiceRequestEntity.new {
+                        user = james
+                        description = "I need someone to paint my walls"
+                        category = ServiceCategory.LIFESKILLS
+                    }
+                    ServiceRequestEntity.new {
+                        user = james
+                        description = "I am looking for a football coach for my children"
+                        category = ServiceCategory.LIFESKILLS
                     }
                 }
             }
