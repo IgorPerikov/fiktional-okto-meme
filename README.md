@@ -1,2 +1,2 @@
 # fiktional-okto-meme
-board of people requests
+small project for trying out jb kotlin stack and k8s
