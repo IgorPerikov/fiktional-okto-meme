@@ -8,6 +8,7 @@ import io.ktor.application.install
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.DefaultHeaders
+import io.ktor.features.StatusPages
 import io.ktor.http.HttpStatusCode
 import io.ktor.jackson.jackson
 import io.ktor.locations.Location
@@ -43,22 +44,19 @@ fun Application.main() {
 
         }
     }
+    install(StatusPages) {
+        exception<Throwable> { _ ->
+            call.respond(HttpStatusCode.NotFound)
+        }
+    }
     install(Routing) {
         get<ProviderById> { providerRequest ->
             val provider = ProvidersService.getProviderById(providerRequest.id)
-            if (provider == null) {
-                call.respond(HttpStatusCode.NotFound)
-            } else {
-                call.respond(provider)
-            }
+            call.respond(provider)
         }
         get<RequestsById> { requestRequest ->
             val request = RequestsService.getRequestById(requestRequest.id)
-            if (request == null) {
-                call.respond(HttpStatusCode.NotFound)
-            } else {
-                call.respond(request)
-            }
+            call.respond(request)
         }
     }
 }
