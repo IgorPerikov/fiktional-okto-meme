@@ -21,8 +21,6 @@ import io.ktor.routing.method
 import io.ktor.routing.optionalParam
 import io.ktor.routing.route
 import oktomeme.db.DbTools
-import oktomeme.db.ProvidersService
-import oktomeme.db.RequestsService
 import org.slf4j.event.Level
 import java.net.InetAddress
 

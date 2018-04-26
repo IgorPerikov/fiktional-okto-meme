@@ -1,8 +1,7 @@
-package oktomeme.db
+package oktomeme
 
-import oktomeme.NotFoundException
-import oktomeme.Provider
-import oktomeme.Request
+import oktomeme.db.ServiceProviderEntity
+import oktomeme.db.ServiceRequestEntity
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object ProvidersService {
