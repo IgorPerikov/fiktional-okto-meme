@@ -16,7 +16,7 @@ spec:
       - name: oktomeme
         env:
         - name: JDBC_URL
-          value: jdbc:postgresql://pg-service:5432/postgres?user=root&password=root&ssl=false
+          value: jdbc:postgresql://pg-service:5432/postgres?user=my_user&password=my_password&ssl=false
         image: igorperikov/oktomeme:5
         ports:
         - containerPort: 8080

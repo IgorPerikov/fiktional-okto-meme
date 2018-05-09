@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.2.31'
+    ext.kotlin_version = '1.2.41'
     ext.shadow_plugin_version = '2.0.2'
 
     repositories {
@@ -43,6 +43,7 @@ ext {
     hikari_cp_version = '2.7.8'
     logback_version = '1.2.3'
 }
+
 dependencies {
     compile ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
 

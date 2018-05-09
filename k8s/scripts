@@ -1,0 +1,10 @@
+minikube start --memory=5000
+
+kubectl create -f pg-deployment.yaml
+kubectl create -f oktomeme-deployment.yaml
+
+watch kubectl get svc,pod,deployment
+
+kubectl apply -f oktomeme-deployment.yaml - to apply updates in yaml file
+
+minikube service oktomeme-service --url - get the external url for given service
