@@ -24,12 +24,12 @@ object DbTools {
     }
 
     private fun setupConnectionPool() {
-        val config = HikariConfig()
-        config.jdbcUrl = System.getenv("JDBC_URL") ?: DEFAULT_JDBC_URL
-        config.maximumPoolSize = 10
+        val config = HikariConfig().apply {
+            this.jdbcUrl = System.getenv("JDBC_URL") ?: DEFAULT_JDBC_URL
+            this.maximumPoolSize = 10
+        }
 
-        dataSource = HikariDataSource(config)
-        Database.connect(dataSource)
+        dataSource = HikariDataSource(config).apply { Database.connect(this) }
     }
 
     private fun launchMigrations() {
